@@ -8,7 +8,7 @@ import { RegistrationSection } from '@/components/RegistrationSection';
 import { SponsorsSection } from '@/components/SponsorsSection';
 import { Footer } from '@/components/Footer';
 
-const Index = () => {
+const Home = () => {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <Navbar />
@@ -26,4 +26,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Home;

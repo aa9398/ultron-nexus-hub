@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ChevronDown, Sparkles, Zap } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { ParticleField } from './ParticleField';
 
 export const HeroSection = () => {
@@ -8,87 +8,83 @@ export const HeroSection = () => {
       <ParticleField />
       
       {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background z-10" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-float" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary/20 rounded-full blur-[100px] animate-float" style={{ animationDelay: '2s' }} />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/30 to-background z-10" />
+      <div className="absolute top-20 left-1/3 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[150px]" />
+      <div className="absolute bottom-20 right-1/4 w-[400px] h-[400px] bg-secondary/8 rounded-full blur-[120px]" />
       
       <div className="relative z-20 container mx-auto px-4 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="space-y-8"
+          transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="space-y-6"
         >
-          {/* Badge */}
+          {/* Main Title - cleaner, bolder */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 glass-panel rounded-full text-sm font-medium"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 1 }}
           >
-            <Sparkles className="w-4 h-4 text-secondary" />
-            <span className="gradient-text">The Ultimate Tech Experience</span>
+            <h1 className="font-orbitron text-7xl md:text-9xl lg:text-[12rem] font-black tracking-tighter leading-none">
+              <span className="bg-gradient-to-br from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent">
+                ULTRON
+              </span>
+            </h1>
+            <div className="flex items-center justify-center gap-4 mt-2">
+              <div className="h-px w-16 md:w-32 bg-gradient-to-r from-transparent to-primary/50" />
+              <span className="font-orbitron text-4xl md:text-6xl font-bold text-primary/80">9.0</span>
+              <div className="h-px w-16 md:w-32 bg-gradient-to-l from-transparent to-secondary/50" />
+            </div>
           </motion.div>
 
-          {/* Main Title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="font-orbitron text-6xl md:text-8xl lg:text-9xl font-black tracking-tight"
-          >
-            <span className="gradient-text neon-text">ULTRON</span>
-            <span className="block text-4xl md:text-6xl lg:text-7xl mt-2 text-foreground">9.0</span>
-          </motion.h1>
-
-          {/* Subtitle */}
+          {/* Subtitle - more subtle */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto font-light"
+            transition={{ delay: 0.6 }}
+            className="text-lg md:text-xl text-muted-foreground/70 max-w-xl mx-auto font-light tracking-wide"
           >
-            Where <span className="text-primary font-medium">Innovation</span> Meets the{' '}
-            <span className="text-secondary font-medium">Future</span>
+            The flagship tech fest redefining innovation
           </motion.p>
 
-          {/* Date Badge */}
+          {/* Date - minimal */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="flex items-center justify-center gap-6 text-sm text-muted-foreground/50 font-mono"
+          >
+            <span>MAR 15-17</span>
+            <span className="w-1 h-1 rounded-full bg-primary/50" />
+            <span>2025</span>
+          </motion.div>
+
+          {/* CTA Buttons - cleaner */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="flex items-center justify-center gap-4 text-sm text-muted-foreground"
-          >
-            <Zap className="w-4 h-4 text-secondary" />
-            <span>March 15-17, 2025</span>
-            <span>•</span>
-            <span>Tech Innovation Hub</span>
-          </motion.div>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6"
+            transition={{ delay: 1 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8"
           >
             <motion.a
               href="#register"
-              className="group relative px-8 py-4 bg-gradient-to-r from-primary to-secondary rounded-full font-semibold text-primary-foreground overflow-hidden"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="group relative px-10 py-4 rounded-full font-medium overflow-hidden"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <span className="relative z-10">Register Now</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-secondary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary" />
+              <div className="absolute inset-[1px] bg-background rounded-full group-hover:bg-transparent transition-colors duration-300" />
+              <span className="relative z-10 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent group-hover:text-primary-foreground transition-colors duration-300 font-semibold">
+                Register Now
+              </span>
             </motion.a>
             
             <motion.a
               href="#events"
-              className="px-8 py-4 glass-panel rounded-full font-semibold text-foreground border border-border hover:border-primary/50 transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="px-10 py-4 text-muted-foreground/70 hover:text-foreground transition-colors font-medium"
+              whileHover={{ x: 5 }}
             >
-              Explore Events
+              Explore Events →
             </motion.a>
           </motion.div>
         </motion.div>
@@ -96,17 +92,15 @@ export const HeroSection = () => {
         {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
+          animate={{ opacity: 0.5 }}
+          transition={{ delay: 1.5 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
           <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="flex flex-col items-center gap-2 text-muted-foreground"
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           >
-            <span className="text-xs tracking-widest uppercase">Scroll</span>
-            <ChevronDown className="w-5 h-5" />
+            <ChevronDown className="w-6 h-6 text-muted-foreground/40" />
           </motion.div>
         </motion.div>
       </div>
