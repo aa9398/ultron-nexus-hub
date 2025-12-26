@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import logo from '@/assets/logo.png';
+import { CosmicLink } from './CosmicLink';
 
 const navItems = [
   { label: 'Home', href: '#home' },
@@ -45,24 +46,13 @@ export const Navbar = () => {
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center gap-8">
           {navItems.map((item) => (
-            <motion.a
-              key={item.label}
-              href={item.href}
-              className="text-foreground/80 hover:text-foreground font-medium text-sm tracking-wide transition-colors relative group"
-              whileHover={{ y: -2 }}
-            >
+            <CosmicLink key={item.label} href={item.href} variant="text">
               {item.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
-            </motion.a>
+            </CosmicLink>
           ))}
-          <motion.a
-            href="#register"
-            className="px-6 py-2.5 bg-gradient-to-r from-primary to-secondary rounded-full font-semibold text-sm text-primary-foreground shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all duration-300"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
+          <CosmicLink href="#register" variant="primary">
             Register Now
-          </motion.a>
+          </CosmicLink>
         </div>
 
         {/* Mobile Menu Button */}

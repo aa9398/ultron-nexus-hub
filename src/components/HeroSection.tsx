@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { ParticleField } from './ParticleField';
+import { CosmicLink } from './CosmicLink';
 
 export const HeroSection = () => {
   return (
@@ -59,33 +60,19 @@ export const HeroSection = () => {
             <span>2025</span>
           </motion.div>
 
-          {/* CTA Buttons - cleaner */}
+          {/* CTA Buttons - cosmic style */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8"
           >
-            <motion.a
-              href="#register"
-              className="group relative px-10 py-4 rounded-full font-medium overflow-hidden"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary" />
-              <div className="absolute inset-[1px] bg-background rounded-full group-hover:bg-transparent transition-colors duration-300" />
-              <span className="relative z-10 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent group-hover:text-primary-foreground transition-colors duration-300 font-semibold">
-                Register Now
-              </span>
-            </motion.a>
-            
-            <motion.a
-              href="#events"
-              className="px-10 py-4 text-muted-foreground/70 hover:text-foreground transition-colors font-medium"
-              whileHover={{ x: 5 }}
-            >
+            <CosmicLink href="#register" variant="primary" className="px-10 py-4 text-base">
+              Register Now
+            </CosmicLink>
+            <CosmicLink href="#events" variant="secondary">
               Explore Events →
-            </motion.a>
+            </CosmicLink>
           </motion.div>
         </motion.div>
 
