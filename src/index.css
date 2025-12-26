@@ -6,65 +6,65 @@
 
 @layer base {
   :root {
-    /* ULTRON 9.0 Futuristic Theme */
-    --background: 260 60% 3%;
-    --foreground: 0 0% 98%;
+    /* ULTRON 9.0 Futuristic Theme - Refined */
+    --background: 260 50% 4%; /* Deep cosmic purple/black */
+    --foreground: 220 20% 98%; /* Soft white */
 
-    --card: 260 50% 8%;
-    --card-foreground: 0 0% 98%;
+    --card: 260 40% 6%;
+    --card-foreground: 220 20% 98%;
 
-    --popover: 260 50% 6%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 260 40% 6%;
+    --popover-foreground: 220 20% 98%;
 
-    /* Deep Purple Primary */
-    --primary: 270 100% 50%;
+    /* Deep Cosmic Purple Primary - Elegant, not neon */
+    --primary: 265 80% 60%;
     --primary-foreground: 0 0% 100%;
 
-    /* Neon Cyan Secondary */
-    --secondary: 190 100% 50%;
-    --secondary-foreground: 260 60% 3%;
+    /* Cool Electric Blue Secondary */
+    --secondary: 200 90% 60%;
+    --secondary-foreground: 260 50% 4%;
 
-    --muted: 260 30% 15%;
-    --muted-foreground: 260 10% 60%;
+    --muted: 260 30% 12%;
+    --muted-foreground: 260 20% 70%;
 
     /* Electric Accent */
-    --accent: 200 100% 60%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 190 90% 50%;
+    --accent-foreground: 260 50% 4%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 260 30% 20%;
-    --input: 260 30% 15%;
-    --ring: 270 100% 50%;
+    --border: 260 30% 15%;
+    --input: 260 30% 12%;
+    --ring: 265 80% 60%;
 
     --radius: 0.75rem;
 
     /* Custom Ultron Theme Tokens */
-    --glow-primary: 270 100% 50%;
-    --glow-secondary: 190 100% 60%;
-    --glass: 260 50% 10%;
-    --glass-border: 260 40% 25%;
+    --glow-primary: 265 80% 60%;
+    --glow-secondary: 200 90% 60%;
+    --glass: 260 40% 8%;
+    --glass-border: 260 30% 20%;
     
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(270 100% 50%) 0%, hsl(200 100% 50%) 100%);
-    --gradient-hero: linear-gradient(180deg, hsl(260 60% 3%) 0%, hsl(260 50% 8%) 100%);
-    --gradient-glass: linear-gradient(135deg, hsl(260 50% 15% / 0.5) 0%, hsl(260 50% 8% / 0.3) 100%);
-    --gradient-neon: linear-gradient(90deg, hsl(270 100% 50%) 0%, hsl(190 100% 50%) 50%, hsl(270 100% 50%) 100%);
+    /* Gradients - Smoother, less harsh */
+    --gradient-primary: linear-gradient(135deg, hsl(265 80% 60%) 0%, hsl(200 90% 60%) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(260 50% 4%) 0%, hsl(260 40% 8%) 100%);
+    --gradient-glass: linear-gradient(135deg, hsl(260 40% 12% / 0.6) 0%, hsl(260 40% 8% / 0.4) 100%);
+    --gradient-neon: linear-gradient(90deg, hsl(265 80% 60%) 0%, hsl(200 90% 60%) 100%);
 
-    /* Shadows */
-    --shadow-neon: 0 0 30px hsl(270 100% 50% / 0.4);
-    --shadow-glow: 0 0 60px hsl(200 100% 60% / 0.3);
-    --shadow-card: 0 25px 50px -12px hsl(0 0% 0% / 0.5);
+    /* Shadows - Ambient glow only */
+    --shadow-neon: 0 0 20px hsl(265 80% 60% / 0.25);
+    --shadow-glow: 0 0 40px hsl(200 90% 60% / 0.2);
+    --shadow-card: 0 20px 40px -10px hsl(0 0% 0% / 0.4);
 
-    --sidebar-background: 260 50% 6%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 270 100% 50%;
+    --sidebar-background: 260 40% 6%;
+    --sidebar-foreground: 220 20% 98%;
+    --sidebar-primary: 265 80% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 260 30% 15%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 260 30% 20%;
-    --sidebar-ring: 270 100% 50%;
+    --sidebar-accent: 260 30% 12%;
+    --sidebar-accent-foreground: 220 20% 98%;
+    --sidebar-border: 260 30% 15%;
+    --sidebar-ring: 265 80% 60%;
   }
 }
 

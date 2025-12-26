@@ -60,7 +60,7 @@ export const EventsSection = () => {
       <div className="container mx-auto px-4">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           className="max-w-2xl mb-16"
         >
@@ -79,7 +79,7 @@ export const EventsSection = () => {
           {events.map((event, index) => (
             <motion.div
               key={event.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: index * 0.08 }}
               className="group relative p-6 rounded-2xl border border-border/30 bg-background/50 hover:border-primary/30 hover:bg-primary/[0.02] transition-all duration-300 cursor-pointer"

@@ -49,7 +49,7 @@ export const TimelineSection = () => {
       <div className="container mx-auto px-4">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           className="text-center mb-16"
         >
@@ -72,7 +72,7 @@ export const TimelineSection = () => {
           {timelineEvents.map((event, index) => (
             <motion.div
               key={event.title}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -12 : 12 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ delay: index * 0.15 }}
               className={`relative flex items-center mb-12 ${
@@ -82,7 +82,7 @@ export const TimelineSection = () => {
               {/* Timeline Node */}
               <div className="absolute left-4 md:left-1/2 transform -translate-x-1/2 z-10">
                 <motion.div
-                  whileHover={{ scale: 1.2 }}
+                  whileHover={{ boxShadow: "0 0 15px hsl(var(--primary))" }}
                   className="w-4 h-4 rounded-full bg-gradient-to-r from-primary to-secondary shadow-lg shadow-primary/50"
                 />
               </div>
@@ -94,8 +94,8 @@ export const TimelineSection = () => {
                 }`}
               >
                 <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className="glass-panel p-6 hover:border-primary/50 transition-colors"
+                  whileHover={{ borderColor: "hsl(var(--primary)/0.5)", boxShadow: "0 0 20px hsl(var(--primary)/0.1)" }}
+                  className="glass-panel p-6 hover:border-primary/50 transition-colors border border-transparent"
                 >
                   <div className="flex items-center gap-4 mb-4">
                     <div className="flex items-center gap-2 text-primary">

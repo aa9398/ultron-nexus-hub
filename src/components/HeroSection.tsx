@@ -15,7 +15,7 @@ export const HeroSection = () => {
       
       <div className="relative z-20 container mx-auto px-4 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="space-y-6"
@@ -62,7 +62,7 @@ export const HeroSection = () => {
 
           {/* CTA Buttons - cosmic style */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8"

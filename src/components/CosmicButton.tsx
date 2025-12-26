@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface CosmicButtonProps {
@@ -9,20 +9,20 @@ interface CosmicButtonProps {
   disabled?: boolean;
 }
 
-// Floating particles inside the button
+// Subtle internal particle shimmer (barely visible)
 const ButtonParticle = ({ delay }: { delay: number }) => {
   return (
     <motion.div
-      className="absolute w-1 h-1 rounded-full bg-foreground/60"
+      className="absolute w-1 h-1 rounded-full bg-white/20"
       initial={{ opacity: 0, x: '50%', y: '50%' }}
       animate={{
-        opacity: [0, 0.8, 0],
-        x: ['30%', `${Math.random() * 100}%`],
+        opacity: [0, 0.4, 0],
+        x: ['10%', `${Math.random() * 100}%`],
         y: ['50%', `${20 + Math.random() * 60}%`],
-        scale: [0.5, 1, 0.3],
+        scale: [0.5, 0.8, 0.3],
       }}
       transition={{
-        duration: 3,
+        duration: 4,
         delay,
         repeat: Infinity,
         ease: 'easeInOut',
@@ -40,32 +40,30 @@ export const CosmicButton = ({
 }: CosmicButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
-  const [ripple, setRipple] = useState<{ x: number; y: number } | null>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  
+  // Mouse position for 3D tilt
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!buttonRef.current) return;
+    const rect = buttonRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setMousePosition({ x, y });
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setMousePosition({ x: 0, y: 0 });
+  };
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (disabled) return;
-    
-    // Create ripple effect
-    const rect = buttonRef.current?.getBoundingClientRect();
-    if (rect) {
-      setRipple({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      });
-    }
-    
     setIsPressed(true);
     setTimeout(() => setIsPressed(false), 300);
     onClick?.();
   };
-
-  useEffect(() => {
-    if (ripple) {
-      const timer = setTimeout(() => setRipple(null), 600);
-      return () => clearTimeout(timer);
-    }
-  }, [ripple]);
 
   const isPrimary = variant === 'primary';
 
@@ -73,143 +71,105 @@ export const CosmicButton = ({
     <motion.button
       ref={buttonRef}
       onClick={handleClick}
-      disabled={disabled}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      disabled={disabled}
       className={`
-        relative overflow-hidden rounded-full font-orbitron font-semibold tracking-wider
-        transition-all duration-300 cursor-pointer select-none
-        ${isPrimary ? 'px-10 py-5 text-base md:text-lg' : 'px-8 py-4 text-sm md:text-base'}
+        relative overflow-hidden rounded-full font-orbitron font-medium tracking-widest
+        transition-all duration-500 cursor-pointer select-none
+        ${isPrimary ? 'px-10 py-5 text-sm md:text-base' : 'px-8 py-4 text-xs md:text-sm'}
         ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
         ${className}
       `}
       animate={{
-        scale: isPressed ? 0.95 : isHovered ? 1.02 : 1,
-        rotateX: isHovered ? -5 : 0,
-        z: isHovered ? 20 : 0,
+        scale: isPressed ? 0.98 : 1,
+        y: isHovered ? -2 : 0,
+        rotateX: isHovered ? mousePosition.y * 10 : 0,
+        rotateY: isHovered ? -mousePosition.x * 10 : 0,
       }}
-      transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+      transition={{ 
+        type: 'spring', 
+        stiffness: 300, 
+        damping: 30,
+        mass: 0.8
+      }}
       style={{ perspective: '1000px', transformStyle: 'preserve-3d' }}
     >
-      {/* Glassmorphism background */}
-      <div className="absolute inset-0 bg-card/30 backdrop-blur-xl rounded-full" />
+      {/* Frosted Glass Background with Depth */}
+      <div className="absolute inset-0 bg-glass/60 backdrop-blur-md rounded-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]" />
       
-      {/* Gradient border */}
+      {/* Gradient Border Stroke */}
       <motion.div
-        className="absolute inset-0 rounded-full"
+        className="absolute inset-0 rounded-full p-[1px]"
         style={{
-          padding: '2px',
-          background: isPrimary 
-            ? 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--primary)))' 
-            : 'linear-gradient(135deg, hsl(var(--primary) / 0.5), hsl(var(--secondary) / 0.5))',
+          background: 'linear-gradient(135deg, hsl(var(--primary)/0.5), hsl(var(--secondary)/0.5))',
           WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
           WebkitMaskComposite: 'xor',
           maskComposite: 'exclude',
         }}
         animate={{
-          opacity: isHovered ? 1 : 0.7,
+          opacity: isHovered ? 1 : 0.6,
         }}
+        transition={{ duration: 0.5 }}
       />
       
-      {/* Outer glow */}
+      {/* Idle Breathing Glow (Very Slow) */}
       <motion.div
-        className="absolute -inset-1 rounded-full blur-lg"
-        style={{
-          background: 'linear-gradient(135deg, hsl(var(--primary) / 0.4), hsl(var(--secondary) / 0.4))',
-        }}
+        className="absolute inset-0 rounded-full bg-primary/5"
         animate={{
-          opacity: isHovered ? 0.8 : 0.3,
-          scale: isHovered ? 1.1 : 1,
-        }}
-        transition={{ duration: 0.3 }}
-      />
-      
-      {/* Breathing pulse animation */}
-      <motion.div
-        className="absolute inset-0 rounded-full"
-        style={{
-          background: 'linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--secondary) / 0.1))',
-        }}
-        animate={{
-          opacity: [0.3, 0.6, 0.3],
+          opacity: [0.2, 0.4, 0.2],
         }}
         transition={{
-          duration: 2,
+          duration: 8,
           repeat: Infinity,
-          ease: 'easeInOut',
+          ease: "easeInOut"
         }}
       />
+
+      {/* Hover Glow Elevation */}
+      <motion.div
+        className="absolute -inset-4 rounded-full bg-primary/20 blur-xl"
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: isHovered ? 0.4 : 0,
+          scale: isHovered ? 1 : 0.9,
+        }}
+        transition={{ duration: 0.5 }}
+      />
       
-      {/* Floating star particles inside button */}
-      <div className="absolute inset-0 overflow-hidden rounded-full">
-        {[...Array(6)].map((_, i) => (
-          <ButtonParticle key={i} delay={i * 0.5} />
+      {/* Subtle Internal Particles */}
+      <div className="absolute inset-0 overflow-hidden rounded-full opacity-30 pointer-events-none">
+        {[...Array(5)].map((_, i) => (
+          <ButtonParticle key={i} delay={i * 0.8} />
         ))}
       </div>
       
-      {/* Hover light distortion effect */}
-      <AnimatePresence>
-        {isHovered && (
-          <motion.div
-            className="absolute inset-0 rounded-full"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            style={{
-              background: 'radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), hsl(var(--foreground) / 0.1) 0%, transparent 50%)',
-            }}
-          />
-        )}
-      </AnimatePresence>
-      
-      {/* Ripple shockwave on click */}
-      <AnimatePresence>
-        {ripple && (
-          <motion.div
-            className="absolute rounded-full bg-foreground/30"
-            initial={{ 
-              width: 0, 
-              height: 0, 
-              x: ripple.x, 
-              y: ripple.y,
-              opacity: 0.8 
-            }}
-            animate={{ 
-              width: 400, 
-              height: 400, 
-              x: ripple.x - 200, 
-              y: ripple.y - 200,
-              opacity: 0 
-            }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          />
-        )}
-      </AnimatePresence>
-      
-      {/* Light beam on click */}
+      {/* Click Energy Compression (Soft Radial Distortion) */}
       <AnimatePresence>
         {isPressed && (
           <motion.div
             className="absolute inset-0 rounded-full"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 0.8, 0] }}
-            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0, scale: 1.5 }}
+            animate={{ opacity: 0.5, scale: 0.8 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, ease: "circOut" }}
             style={{
-              background: 'radial-gradient(circle, hsl(var(--foreground) / 0.5) 0%, transparent 70%)',
+              background: 'radial-gradient(circle, transparent 30%, hsl(var(--primary)/0.2) 100%)',
             }}
           />
         )}
       </AnimatePresence>
       
-      {/* Button text */}
+      {/* Button Text */}
       <motion.span
-        className="relative z-10 text-foreground drop-shadow-[0_0_10px_hsl(var(--foreground)/0.5)]"
+        className="relative z-10 text-white flex items-center justify-center gap-2"
         animate={{
           textShadow: isHovered 
-            ? '0 0 20px hsl(var(--foreground) / 0.8)' 
-            : '0 0 10px hsl(var(--foreground) / 0.3)',
+            ? '0 0 15px rgba(255,255,255,0.6)' 
+            : '0 0 8px rgba(255,255,255,0.3)',
         }}
+        transition={{ duration: 0.4 }}
       >
         {children}
       </motion.span>

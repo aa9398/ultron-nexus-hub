@@ -28,8 +28,9 @@ export const Navbar = () => {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
+      initial={{ y: -12, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled ? 'glass-panel py-3' : 'py-6'
       }`}
@@ -38,7 +39,7 @@ export const Navbar = () => {
         <motion.a
           href="#home"
           className="flex items-center gap-3"
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ textShadow: "0 0 8px rgba(255,255,255,0.5)" }}
         >
           <img src={logo} alt="ULTRON 9.0" className="h-10 w-auto" />
         </motion.a>
